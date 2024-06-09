@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+img {
+  @apply max-h-full max-w-full object-cover;
+}
+
+input[data-form="login"] + label {
+  @apply bg-primary text-text rounded-md;
+}
+
+label[data-form="create"] {
+  @apply text-text;
+}
+
+input[data-input="search"] {
+  @apply pr-10;
+}
