@@ -151,7 +151,7 @@ const Genres = () => {
         </form>
       </div>
 
-      <section className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 bg-sub p-6 rounded-md">
+      <section className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 py-6 rounded-md">
         {currentData &&
           currentData.length > 0 &&
           currentData

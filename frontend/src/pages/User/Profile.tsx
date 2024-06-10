@@ -40,7 +40,7 @@ const Profile = () => {
       </h1>
 
       <div className="flex flex-col md:flex-row gap-4 md:gap-8 h-full">
-        <section className="bg-sub flex-1 p-4 rounded-md flex flex-col">
+        <section className="flex-1 p-4 rounded-md flex flex-col">
           <Label className="mx-auto">
             <img
               src={userInfo?.image}
