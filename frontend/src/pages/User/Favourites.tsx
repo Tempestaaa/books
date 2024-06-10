@@ -1,12 +1,44 @@
-import { Label, Pagination, TextInput } from "flowbite-react";
+import { Button, Label, Pagination, TextInput } from "flowbite-react";
 import { useState } from "react";
-import { useGetFavouritesQuery } from "../../redux/features/user.api";
-import { Link } from "react-router-dom";
+import {
+  useDeleteAllFavouritesMutation,
+  useDeleteFavouriteMutation,
+  useGetFavouritesQuery,
+} from "../../redux/features/user.api";
+import { FaTrash } from "react-icons/fa";
+import AreYouSure from "../../components/AreYouSure";
+import { toast } from "react-toastify";
+import CardFavourites from "../../components/CardFavourites";
 
 const Favourites = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [id, setId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: favourites } = useGetFavouritesQuery();
+  const [deleteOne] = useDeleteFavouriteMutation();
+  const [deleteAll] = useDeleteAllFavouritesMutation();
+
+  const handleDeleteOne = async () => {
+    try {
+      await deleteOne({ bookId: id! }).unwrap();
+      toast.success("Book removed from favourites");
+    } catch (error: any) {
+      toast.error(error?.data?.message || error.error);
+    }
+
+    setId("");
+    setIsModalOpen(false);
+  };
+
+  const handleDeleteAll = async () => {
+    try {
+      await deleteAll().unwrap();
+      toast.success("All books removed from favourites");
+    } catch (error: any) {
+      toast.error(error?.data?.message || error.error);
+    }
+  };
 
   // Pagination
   const dataPerPage = 24;
@@ -33,29 +65,35 @@ const Favourites = () => {
         )}
       </div>
 
-      <form className="w-full md:w-1/2">
-        <Label data-form="create" className="flex-1 relative">
-          Search:
-          <TextInput
-            data-input="search"
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          {search !== "" && (
-            <div
-              className="absolute top-5 right-2 text-4xl text-secondary cursor-pointer"
-              onClick={() => setSearch("")}
-            >
-              &times;
-            </div>
-          )}
-        </Label>
-      </form>
+      <div className="flex gap-4 items-end justify-between">
+        <form className="w-full md:w-1/2">
+          <Label data-form="create" className="flex-1 relative">
+            Search:
+            <TextInput
+              data-input="search"
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            {search !== "" && (
+              <div
+                className="absolute top-5 right-2 text-4xl text-secondary cursor-pointer"
+                onClick={() => setSearch("")}
+              >
+                &times;
+              </div>
+            )}
+          </Label>
+        </form>
+
+        <Button color="failure" className="py-1" onClick={handleDeleteAll}>
+          <FaTrash />
+        </Button>
+      </div>
 
       <div className="border my-4 border-sub"></div>
 
-      <section className="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
+      <section className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
         {currentData &&
           currentData.length > 0 &&
           currentData
@@ -65,21 +103,25 @@ const Favourites = () => {
                 : item.title.toLowerCase().includes(search.toLowerCase());
             })
             .map((item) => (
-              <div key={item._id} className="relative group overflow-hidden">
-                <Link to={`/book/${item._id}`}>
-                  <img
-                    src={item.coverImage}
-                    alt="Book cover"
-                    className="mx-auto w-full max-h-[400px] rounded-xl group-hover:border-2 border-secondary/50 object-fill"
-                  />
-                </Link>
-
-                <div className="absolute -top-full left-0 group-hover:top-0 duration-300 px-2 py-6 bg-gradient-to-b from-primary/80 from-20% to-transparent w-full rounded-t-xl capitalize font-bold">
-                  {item.title}
-                </div>
-              </div>
+              <CardFavourites
+                key={item._id}
+                item={item}
+                setId={setId}
+                setIsModalOpen={setIsModalOpen}
+              />
             ))}
+
+        {currentData?.length === 0 && (
+          <p className="font-bold">No favourites yet!</p>
+        )}
       </section>
+
+      {/* Modal */}
+      <AreYouSure
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        handler={handleDeleteOne}
+      />
     </article>
   );
 };

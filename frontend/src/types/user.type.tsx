@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { bookSchema } from "./book.type";
 
 export const loginForm = z.object({
   email: z.string().email().trim().min(1, { message: "Required" }),
@@ -32,3 +31,9 @@ export const updateForm = userSchema.pick({
   username: true,
 });
 export type UserUpdate = z.infer<typeof updateForm>;
+
+export const passwordForm = registerForm.pick({
+  password: true,
+  confirmPassword: true,
+});
+export type PasswordUpdate = z.infer<typeof passwordForm>;

@@ -82,6 +82,10 @@ export const updateUser = expressAsyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.image = req.body.image || user.image;
 
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
     const updatedUser = await user.save();
     res.status(200).json({
       _id: updatedUser._id,

@@ -26,8 +26,8 @@ const BookDetails = () => {
 
   const handleAddFavourites = async () => {
     try {
-      const res = await addFavourites({ bookId: id! }).unwrap();
-      console.log(res);
+      await addFavourites({ bookId: id! }).unwrap();
+      toast.success("Book added to favourites");
     } catch (error: any) {
       toast.error(error?.data?.message || error.error);
     }

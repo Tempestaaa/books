@@ -1,5 +1,6 @@
 import { Book } from "../../types/book.type";
 import {
+  PasswordUpdate,
   User,
   UserLogin,
   UserRegister,
@@ -48,6 +49,7 @@ const userApi = apiSlice.injectEndpoints({
 
     getUser: builder.query<User, void>({
       query: () => `${USER_URL}/user`,
+      providesTags: ["User"],
     }),
 
     updateUser: builder.mutation<User, UserUpdate>({
@@ -57,6 +59,14 @@ const userApi = apiSlice.injectEndpoints({
         body: data,
       }),
       invalidatesTags: ["User"],
+    }),
+
+    updatePassord: builder.mutation<User, PasswordUpdate>({
+      query: (data) => ({
+        url: `${USER_URL}/user`,
+        method: "PUT",
+        body: data,
+      }),
     }),
 
     deleteUser: builder.mutation<{}, void>({
@@ -69,6 +79,7 @@ const userApi = apiSlice.injectEndpoints({
 
     getFavourites: builder.query<Book[], void>({
       query: () => `${USER_URL}/user/favourites`,
+      providesTags: ["User"],
     }),
 
     addFavourites: builder.mutation<void, { bookId: string }>({
@@ -77,6 +88,7 @@ const userApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["User"],
     }),
 
     deleteFavourite: builder.mutation<{}, { bookId: string }>({
@@ -85,6 +97,7 @@ const userApi = apiSlice.injectEndpoints({
         method: "DELETE",
         body: data,
       }),
+      invalidatesTags: ["User", "Book"],
     }),
 
     deleteAllFavourites: builder.mutation<void, void>({
@@ -92,6 +105,7 @@ const userApi = apiSlice.injectEndpoints({
         url: `${USER_URL}/user/favourites/all`,
         method: "DELETE",
       }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
@@ -101,6 +115,7 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useUpdateUserMutation,
+  useUpdatePassordMutation,
   useDeleteUserMutation,
   useDeleteUserByIdMutation,
   useAddFavouritesMutation,
