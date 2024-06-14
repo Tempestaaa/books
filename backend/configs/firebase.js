@@ -5,6 +5,6 @@ export default {
     projectId: "mern-movies-97ff6",
     storageBucket: "mern-movies-97ff6.appspot.com",
     messagingSenderId: "24652796699",
-    appId: "1:24652796699:web:cfde28af029824e36d39be",
+    appId: "1:24652796699:web:e08b05bd95535dc16d39be",
   },
 };

@@ -2,7 +2,17 @@ import expressAsyncHandler from "express-async-handler";
 import Books from "../models/books.js";
 
 export const createBook = expressAsyncHandler(async (req, res) => {
-  let { title, desc, author, genres, coverImage, pages, rating } = req.body;
+  let {
+    title,
+    desc,
+    author,
+    genres,
+    coverImage,
+    pages,
+    rating,
+    format,
+    language,
+  } = req.body;
   if (!title || !desc || !author || !genres || !pages || !rating) {
     res.status(400);
     throw new Error("Some fields are missing!");
@@ -22,6 +32,8 @@ export const createBook = expressAsyncHandler(async (req, res) => {
     coverImage,
     pages,
     rating,
+    format,
+    language,
   });
 
   if (book) {
@@ -48,7 +60,17 @@ export const getBook = expressAsyncHandler(async (req, res) => {
 });
 
 export const updateBook = expressAsyncHandler(async (req, res) => {
-  let { title, desc, author, genres, coverImage, pages, rating } = req.body;
+  let {
+    title,
+    desc,
+    author,
+    genres,
+    coverImage,
+    pages,
+    rating,
+    format,
+    language,
+  } = req.body;
 
   const book = await Books.findByIdAndUpdate(req.params.id, {
     title,
@@ -58,6 +80,8 @@ export const updateBook = expressAsyncHandler(async (req, res) => {
     coverImage,
     pages,
     rating,
+    format,
+    language,
   });
   if (!book) {
     res.status(404);

@@ -9,6 +9,8 @@ export const createForm = z.object({
   pages: z.coerce.number().positive(),
   rating: z.coerce.number().positive().min(0).max(5, { message: "Maximum 5" }),
   genres: z.array(genreSchema),
+  format: z.string().trim().min(1, { message: "Required" }),
+  language: z.string().trim().min(1, { message: "Required" }),
 });
 export type BookCreate = z.infer<typeof createForm>;
 

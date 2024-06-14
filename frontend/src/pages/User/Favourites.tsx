@@ -51,7 +51,7 @@ const Favourites = () => {
   return (
     <article className="w-full p-4 rounded-md flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-4xl font-semibold text-center md:text-left uppercase">
+        <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
           Favourites
         </h1>
 
@@ -66,7 +66,7 @@ const Favourites = () => {
       </div>
 
       <div className="flex gap-4 items-end justify-between">
-        <form className="w-full md:w-1/2">
+        <form className="w-full lg:w-1/2">
           <Label data-form="create" className="flex-1 relative">
             Search:
             <TextInput

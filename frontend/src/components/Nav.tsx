@@ -46,7 +46,7 @@ const Nav = () => {
             <img
               src={userInfo.image}
               alt={userInfo.username}
-              className="w-10 aspect-square rounded-full border-2  absolute md:static top-2 right-2"
+              className="w-10 aspect-square rounded-full border-2  absolute lg:static top-2 right-2"
             />
           )}
         >

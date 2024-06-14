@@ -2,7 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PasswordUpdate, passwordForm } from "../../types/user.type";
 import { Button, Label, TextInput } from "flowbite-react";
-import ErrorDisplay from "../../components/ErrorDisplay";
 import { useUpdatePassordMutation } from "../../redux/features/user.api";
 import { toast } from "react-toastify";
 
@@ -34,7 +33,7 @@ const ChangePassword = () => {
 
   return (
     <div className="w-full p-4 rounded-md flex flex-col gap-4">
-      <h1 className="text-4xl font-semibold text-center md:text-left uppercase">
+      <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
         Change password
       </h1>
 
@@ -46,9 +45,6 @@ const ChangePassword = () => {
             autoComplete="new-password"
             {...register("password")}
           />
-          {errors.password && (
-            <ErrorDisplay message={errors.password.message} />
-          )}
         </Label>
 
         <Label data-form="create">
@@ -58,9 +54,6 @@ const ChangePassword = () => {
             autoComplete="new-password"
             {...register("confirmPassword")}
           />
-          {errors.confirmPassword && (
-            <ErrorDisplay message={errors.confirmPassword.message} />
-          )}
         </Label>
 
         <Button color="failure" type="submit" className="mt-4">

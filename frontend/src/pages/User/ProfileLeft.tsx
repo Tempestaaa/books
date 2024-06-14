@@ -2,7 +2,6 @@ import { Button, FileInput, Label, TextInput } from "flowbite-react";
 import { User, UserUpdate, updateForm } from "../../types/user.type";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import ErrorDisplay from "../../components/ErrorDisplay";
 import { useUpdateUserMutation } from "../../redux/features/user.api";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "../../redux/hooks";
@@ -50,20 +49,16 @@ const ProfileLeft = ({ userInfo }: Props) => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-2 w-full md:w-3/4 mx-auto mt-16"
+        className="flex flex-col gap-2 w-full lg:w-3/4 mx-auto mt-16"
       >
         <Label data-form="create">
           Username:
           <TextInput {...register("username")} />
-          {errors.username && (
-            <ErrorDisplay message={errors.username.message} />
-          )}
         </Label>
 
         <Label data-form="create">
           Email:
           <TextInput {...register("email")} />
-          {errors.email && <ErrorDisplay message={errors.email.message} />}
         </Label>
 
         <Button type="submit" color="failure" className="mt-4 py-1">

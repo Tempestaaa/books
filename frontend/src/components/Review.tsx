@@ -33,9 +33,9 @@ const Review = ({ id, item, userInfo }: Props) => {
         <img
           src={item.userImage}
           alt={`${item.userName} avatar`}
-          className="w-12 md:w-16 aspect-square rounded-full border-2"
+          className="w-12 lg:w-16 aspect-square rounded-full border-2"
         />
-        <h1 className="capitalize font-bold text-xs md:text-sm text-center">
+        <h1 className="capitalize font-bold text-xs lg:text-sm text-center">
           {item.userName}
         </h1>
       </div>

@@ -38,7 +38,7 @@ const Books = () => {
   return (
     <div className="w-full p-4 rounded-md flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-4xl font-semibold text-center md:text-left uppercase">
+        <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
           Books Management
         </h1>
 

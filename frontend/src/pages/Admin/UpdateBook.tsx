@@ -5,7 +5,6 @@ import { Button, FileInput, Label, TextInput, Textarea } from "flowbite-react";
 import { useGetGenresQuery } from "../../redux/features/genre.api";
 import { useState } from "react";
 import Select from "react-select";
-import ErrorDisplay from "../../components/ErrorDisplay";
 import {
   useGetBookQuery,
   useUpdateBookMutation,
@@ -52,16 +51,16 @@ const CreateBook = () => {
 
   return (
     <div className="bg-sub w-full h-full p-4 rounded-md flex flex-col gap-4">
-      <h1 className="text-4xl font-semibold text-center md:text-left uppercase">
+      <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
         Update Book
       </h1>
 
       <article>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col md:flex-row gap-4"
+          className="flex flex-col lg:flex-row gap-4"
         >
-          <section className="md:w-96 max-h-[520px] border-2 border-dashed border-blue-500 rounded-md overflow-hidden">
+          <section className="lg:w-96 max-h-[520px] border-2 border-dashed border-blue-500 rounded-md overflow-hidden">
             <Label>
               <div className="w-full h-full">
                 <img
@@ -84,7 +83,6 @@ const CreateBook = () => {
             <Label data-form="create">
               Title:
               <TextInput {...register("title")} className="capitalize" />
-              {errors.title && <ErrorDisplay message={errors.title.message} />}
             </Label>
 
             <Label data-form="create">
@@ -94,7 +92,6 @@ const CreateBook = () => {
                 rows={5}
                 className={`${errors.desc} && "!border-secondary"`}
               />
-              {errors.desc && <ErrorDisplay message={errors.desc.message} />}
             </Label>
 
             <Label data-form="create">
@@ -103,9 +100,6 @@ const CreateBook = () => {
                 {...register("author")}
                 className={`${errors.author} && "!border-secondary"`}
               />
-              {errors.author && (
-                <ErrorDisplay message={errors.author.message} />
-              )}
             </Label>
 
             <Label data-form="create">
@@ -134,7 +128,6 @@ const CreateBook = () => {
                 type="number"
                 className={`${errors.pages} && "!border-secondary"`}
               />
-              {errors.pages && <ErrorDisplay message={errors.pages.message} />}
             </Label>
 
             <Label data-form="create">
@@ -145,9 +138,6 @@ const CreateBook = () => {
                 step="any"
                 className={`${errors.rating} && "!border-secondary"`}
               />
-              {errors.rating && (
-                <ErrorDisplay message={errors.rating.message} />
-              )}
             </Label>
 
             <div className="flex items-center justify-between mt-4">

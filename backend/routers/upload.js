@@ -38,7 +38,7 @@ router.post(
   "/cover",
   authenticate,
   authorized,
-  upload.single("image"),
+  upload.single("cover"),
   expressAsyncHandler(async (req, res) => {
     const storageRef = ref(
       storage,

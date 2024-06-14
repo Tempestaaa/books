@@ -37,7 +37,7 @@ const Users = () => {
   return (
     <div className="w-full p-4 rounded-md flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-4xl font-semibold text-center md:text-left uppercase">
+        <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
           Users Management
         </h1>
 
@@ -51,7 +51,7 @@ const Users = () => {
         )}
       </div>
 
-      <section className="overflow-x-auto md:pr-2 bg-sub rounded-md">
+      <section className="overflow-x-auto lg:pr-2 bg-sub rounded-md">
         <Table className="table-auto">
           <Table.Head>
             <Table.HeadCell>id</Table.HeadCell>

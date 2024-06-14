@@ -85,7 +85,7 @@ const Genres = () => {
   return (
     <div className="w-full p-4 rounded-md flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-4xl font-semibold text-center md:text-left uppercase">
+        <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
           Genres Management
         </h1>
 
@@ -99,7 +99,7 @@ const Genres = () => {
         )}
       </div>
 
-      <div className="flex flex-col md:flex-row gap-2">
+      <div className="flex flex-col lg:flex-row gap-2">
         <form
           onSubmit={isUpdating ? handleUpdate : handleCreate}
           className="flex-1 flex items-end gap-2"

@@ -26,12 +26,12 @@ const CustomSide = ({ tabs }: Props) => {
     else setActive("");
   }, [pathname]);
 
-  const [logoutApi, { isSuccess }] = useLogoutMutation();
+  const [logoutApi] = useLogoutMutation();
   const handleLogout = async () => {
     try {
       await logoutApi().unwrap();
       dispatch(logOut());
-      isSuccess && toast.success("User logged out") && navigate("/");
+      toast.success("User logged out") && navigate("/");
     } catch (error: any) {
       toast.error(error?.data?.message || error.error);
     }

@@ -1,7 +1,6 @@
 import { Button, FloatingLabel } from "flowbite-react";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ErrorDisplay from "../../components/ErrorDisplay";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserRegister, registerForm } from "../../types/user.type";
@@ -51,12 +50,12 @@ const Register = () => {
   return (
     <div className="min-h-svh bg-primary text-text flex font-default">
       {/* LOGIN FORM */}
-      <section className="w-full md:w-1/4 md:border-r border-sub flex items-center">
+      <section className="w-full lg:w-1/4 lg:border-r border-sub flex items-center">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col w-full px-4 gap-4"
         >
-          <h1 className="text-4xl font-semibold text-center md:text-left uppercase">
+          <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
             register
           </h1>
           <div className="flex flex-col gap-2">
@@ -70,7 +69,6 @@ const Register = () => {
                 {...register("email")}
                 className={`text-text ${errors.email && "border-secondary"}`}
               />
-              {errors.email && <ErrorDisplay message={errors.email.message} />}
             </div>
             <div>
               <FloatingLabel
@@ -82,9 +80,6 @@ const Register = () => {
                 {...register("username")}
                 className={`text-text ${errors.username && "border-secondary"}`}
               />
-              {errors.username && (
-                <ErrorDisplay message={errors.username.message} />
-              )}
             </div>
             <div>
               <FloatingLabel
@@ -96,9 +91,6 @@ const Register = () => {
                 {...register("password")}
                 className={`text-text ${errors.password && "border-secondary"}`}
               />
-              {errors.password && (
-                <ErrorDisplay message={errors.password.message} />
-              )}
             </div>
             <div>
               <FloatingLabel
@@ -112,9 +104,6 @@ const Register = () => {
                   errors.confirmPassword && "border-secondary"
                 }`}
               />
-              {errors.confirmPassword && (
-                <ErrorDisplay message={errors.confirmPassword.message} />
-              )}
             </div>
           </div>
           <Button disabled={isSubmitting} type="submit" color="failure">
@@ -136,7 +125,7 @@ const Register = () => {
       </section>
 
       {/* HERO */}
-      <section className="hide md:block flex-1"></section>
+      <section className="hide lg:block flex-1"></section>
 
       {/* Toast */}
       <ToastContainer

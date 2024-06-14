@@ -1,11 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { BookCreate, createForm } from "../../types/book.type";
-import { Button, FileInput, Label, TextInput, Textarea } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { useGetGenresQuery } from "../../redux/features/genre.api";
 import { useState } from "react";
 import Select from "react-select";
-import ErrorDisplay from "../../components/ErrorDisplay";
 import {
   useCreateBookMutation,
   useUploadCoverMutation,
@@ -13,6 +12,8 @@ import {
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 import { useNavigate } from "react-router-dom";
+import Input from "../../components/Input";
+import Textarea from "../../components/Textarea";
 
 const CreateBook = () => {
   const navigate = useNavigate();
@@ -27,116 +28,101 @@ const CreateBook = () => {
   });
   const { data: genres } = useGetGenresQuery();
 
-  const [preview, setPreview] = useState<File>();
+  const [posterPath, setPosterPath] = useState<File | undefined>();
+  const [image, setImage] = useState("");
   const [uploadCover, { isLoading: isUploadingCover }] =
     useUploadCoverMutation();
   const [createBook, { isLoading: isCreatingBook }] = useCreateBookMutation();
 
+  // RESET FORM
   const handleReset = () => {
     reset();
-    setPreview(undefined);
+    setPosterPath(undefined);
   };
 
+  // FILE INPUT
+  const handlePoster = async (e: React.FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement & {
+      files: FileList;
+    };
+    setPosterPath(target.files[0]);
+  };
+
+  // SUBMIT FORM
   const onSubmit: SubmitHandler<BookCreate> = async (data) => {
-    let uploadCoverPath = null;
-    if (preview) {
+    let uploadPath = null;
+
+    if (posterPath) {
       const formData = new FormData();
-      formData.append("image", preview);
+      formData.append("cover", posterPath);
 
-      const uploadCoverRespond = await uploadCover(formData);
       try {
-        if (uploadCoverRespond.data) {
-          uploadCoverPath = uploadCoverRespond.data;
+        const uploadRespond = await uploadCover(formData);
+        if (uploadRespond.data) {
+          uploadPath = uploadRespond.data;
+          setImage(uploadPath);
         }
-      } catch (error: any) {
-        return toast.error(`Failed to upload image: ${error}`);
+      } catch (error) {
+        toast.error(`Failed to upload: ${error}`);
       }
-    }
 
-    try {
-      await createBook({
-        ...data,
-        coverImage: uploadCoverPath as string,
-      }).unwrap();
-      toast.success("Book created successfully");
-      navigate("/dashboard/books");
-    } catch (error: any) {
-      return toast.error(error?.data?.message || error.error);
+      try {
+        await createBook({
+          ...data,
+          coverImage: uploadPath as string,
+        }).unwrap();
+        toast.success("Book created");
+        navigate("/dashboard/books");
+      } catch (error: any) {
+        return toast.error(error?.data?.message || error.error);
+      }
     }
   };
 
   return (
-    <div className="w-full h-full p-4 rounded-md flex flex-col gap-4">
-      <h1 className="text-4xl font-semibold text-center md:text-left uppercase">
+    <div className="w-full h-full lg:p-4 rounded-md flex flex-col">
+      <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
         Create Book
       </h1>
 
-      <article className="my-auto bg-sub p-6 rounded-md">
+      <div className="my-4 border" />
+
+      <article className="w-full my-auto rounded-xl">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col md:flex-row gap-4"
+          className="flex flex-col lg:flex-row gap-4 w-full"
         >
-          <section className="md:w-96 max-h-[520px] border-2 border-dashed border-blue-500 rounded-md overflow-hidden">
-            <Label>
-              <div className="w-full h-full">
-                {preview ? (
-                  <img
-                    src={URL.createObjectURL(preview as File)}
-                    alt="Poster"
-                    className="bg-sub w-full h-full p-2"
-                  />
-                ) : (
-                  <p className="flex items-center justify-center h-full text-text font-bold text-3xl capitalize">
-                    Upload cover
-                  </p>
-                )}
-              </div>
-              <FileInput
-                accept="image/*"
-                className="hidden"
-                disabled={isCreatingBook || isUploadingCover}
-                onChange={(e) =>
-                  e.target.files && setPreview(e.target.files[0])
-                }
+          <label className="h-[420px] lg:w-[360px] p-4 rounded-xl border">
+            {(image || posterPath) && (
+              <img
+                src={image ? image : URL.createObjectURL(posterPath as File)}
+                alt="Cover"
+                className="mx-auto h-full w-full rounded-xl object-fill"
               />
-            </Label>
-          </section>
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              disabled={isCreatingBook || isUploadingCover}
+              onChange={handlePoster}
+            />
+          </label>
 
           <section className="flex-1">
-            <Label data-form="create">
-              Title:
-              <TextInput
-                {...register("title")}
-                placeholder="Enter title"
-                className={`${errors.title} && "!border-secondary"`}
-              />
-              {errors.title && <ErrorDisplay message={errors.title.message} />}
-            </Label>
+            <Input label="Title" {...register("title")} error={errors.title} />
+            <Textarea
+              label="Description"
+              {...register("desc")}
+              error={errors.desc}
+            />
+            <Input
+              label="Author"
+              {...register("author")}
+              error={errors.author}
+            />
 
-            <Label data-form="create">
-              Description:
-              <Textarea
-                {...register("desc")}
-                placeholder="Enter description"
-                rows={5}
-                className={`${errors.desc} && "!border-secondary"`}
-              />
-              {errors.desc && <ErrorDisplay message={errors.desc.message} />}
-            </Label>
-
-            <Label data-form="create">
-              Author:
-              <TextInput
-                {...register("author")}
-                placeholder="Enter author"
-                className={`${errors.author} && "!border-secondary"`}
-              />
-              {errors.author && (
-                <ErrorDisplay message={errors.author.message} />
-              )}
-            </Label>
-
-            <Label data-form="create">
+            <label data-form="create">
               Genres:
               <Controller
                 name="genres"
@@ -145,41 +131,42 @@ const CreateBook = () => {
                   <Select
                     {...field}
                     options={genres}
-                    placeholder="Enter genres"
                     getOptionLabel={(options) => options["name"]}
                     getOptionValue={(options) => options["_id"]}
                     isMulti
                     isClearable
-                    className="focus:!border-primary text-primary capitalize"
+                    className="text-primary capitalize"
                   />
                 )}
               />
-            </Label>
-
-            <Label data-form="create">
-              Pages:
-              <TextInput
-                {...register("pages")}
-                placeholder="Enter pages"
-                type="number"
-                className={`${errors.pages} && "!border-secondary"`}
+            </label>
+            <div className="grid lg:grid-cols-2 lg:gap-4">
+              <Input
+                label="Format"
+                {...register("format")}
+                error={errors.format}
               />
-              {errors.pages && <ErrorDisplay message={errors.pages.message} />}
-            </Label>
-
-            <Label data-form="create">
-              Rating:
-              <TextInput
-                {...register("rating")}
-                placeholder="Enter rating"
+              <Input
+                label="Language"
+                {...register("language")}
+                error={errors.language}
+              />
+            </div>
+            <div className="grid lg:grid-cols-2 lg:gap-4">
+              <Input
+                label="Pages"
+                type="number"
+                {...register("pages")}
+                error={errors.pages}
+              />
+              <Input
+                label="Rating"
                 type="number"
                 step="any"
-                className={`${errors.rating} && "!border-secondary"`}
+                {...register("rating")}
+                error={errors.rating}
               />
-              {errors.rating && (
-                <ErrorDisplay message={errors.rating.message} />
-              )}
-            </Label>
+            </div>
 
             <div className="flex items-center justify-between mt-4">
               <Button color="blue" onClick={handleReset}>

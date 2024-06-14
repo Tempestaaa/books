@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdateUserMutation } from "../../redux/features/user.api";
 import { setCredentials } from "../../redux/auth.slice";
 import { toast } from "react-toastify";
-import ErrorDisplay from "../../components/ErrorDisplay";
 
 const Profile = () => {
   const { userInfo } = useAppSelector((state) => state.auth);
@@ -35,11 +34,11 @@ const Profile = () => {
   };
   return (
     <article className="w-full p-4 rounded-md flex flex-col gap-4">
-      <h1 className="text-4xl font-semibold text-center md:text-left uppercase">
+      <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
         Profile
       </h1>
 
-      <div className="flex flex-col md:flex-row gap-4 md:gap-8 h-full">
+      <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 h-full">
         <section className="flex-1 p-4 rounded-md flex flex-col">
           <Label className="mx-auto">
             <img
@@ -52,20 +51,16 @@ const Profile = () => {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-2 w-full md:w-3/4 mx-auto mt-16"
+            className="flex flex-col gap-2 w-full lg:w-3/4 mx-auto mt-16"
           >
             <Label data-form="create">
               Username:
               <TextInput {...register("username")} />
-              {errors.username && (
-                <ErrorDisplay message={errors.username.message} />
-              )}
             </Label>
 
             <Label data-form="create">
               Email:
               <TextInput {...register("email")} />
-              {errors.email && <ErrorDisplay message={errors.email.message} />}
             </Label>
 
             <Button type="submit" color="failure" className="mt-4 py-1">

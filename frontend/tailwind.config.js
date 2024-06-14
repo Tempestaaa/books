@@ -10,6 +10,7 @@ export default {
         secondary: "#C81E1E",
         text: "#fff",
         sub: "#222222",
+        failure: "#C81E1E",
       },
       fontFamily: {
         default: '"Montserrat", sans-serif',

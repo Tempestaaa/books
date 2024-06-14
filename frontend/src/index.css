@@ -16,6 +16,10 @@ label[data-form="create"] {
   @apply text-text;
 }
 
-input[data-input="search"] {
-  @apply pr-10;
+label[data-input="form"] {
+  @apply !text-text;
+}
+
+.active {
+  @apply font-bold bg-secondary duration-300;
 }
