@@ -8,7 +8,6 @@ import { AiFillHome } from "react-icons/ai";
 import Divider from "../../components/Divider";
 import { useState } from "react";
 import YourReview from "../../components/YourReview";
-import Review from "../../components/Review";
 import ReviewsDisplay from "../../components/ReviewsDisplay";
 
 const Book = () => {

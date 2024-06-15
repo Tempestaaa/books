@@ -1,4 +1,4 @@
-import { FaStar, FaTimes, FaTrash } from "react-icons/fa";
+import { FaStar, FaTrash } from "react-icons/fa";
 import { ReviewType } from "../types/review.type";
 import { useState } from "react";
 import { User } from "../types/user.type";
