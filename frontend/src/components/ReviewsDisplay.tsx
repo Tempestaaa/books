@@ -10,7 +10,7 @@ type Props = {
 
 const ReviewsDisplay = ({ book, userInfo, id }: Props) => {
   return (
-    <div className="flex flex-col gap-4 pb-16 lg:pr-4">
+    <div className="flex flex-col gap-4 pb-16">
       <h1 className="text-3xl lg:text-4xl font-semibold mb-4">Reviews</h1>
       <div>
         {book?.reviews.map((item) => (

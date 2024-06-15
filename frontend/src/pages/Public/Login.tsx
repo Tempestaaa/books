@@ -31,6 +31,8 @@ const Login = () => {
   const onSubmit: SubmitHandler<UserLogin> = async (data) => {
     try {
       const res = await loginUser(data).unwrap();
+      console.log(res);
+
       dispatch(setCredentials({ ...res }));
       toast.success("User login successfully");
       navigate("/");

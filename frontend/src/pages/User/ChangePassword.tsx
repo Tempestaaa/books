@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PasswordUpdate, passwordForm } from "../../types/user.type";
 import { Button, Label, TextInput } from "flowbite-react";
-import { useUpdatePassordMutation } from "../../redux/features/user.api";
+import { useUpdatePasswordMutation } from "../../redux/features/user.api";
 import { toast } from "react-toastify";
 
 const ChangePassword = () => {
@@ -14,7 +14,7 @@ const ChangePassword = () => {
   } = useForm<PasswordUpdate>({
     resolver: zodResolver(passwordForm),
   });
-  const [updatePassword] = useUpdatePassordMutation();
+  const [updatePassword] = useUpdatePasswordMutation();
 
   const onSubmit: SubmitHandler<PasswordUpdate> = async (data) => {
     if (data.confirmPassword !== data.password) {

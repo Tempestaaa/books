@@ -1,4 +1,4 @@
-import { FaStar, FaTrash } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { ReviewType } from "../types/review.type";
 import { useState } from "react";
 import { User } from "../types/user.type";
@@ -16,8 +16,6 @@ const Review = ({ id, item, userInfo }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteReviewAdmin] = useDeleteReviewAdminMutation();
 
-  console.log(id);
-
   const handleDelete = async () => {
     try {
       await deleteReviewAdmin({ bookId: id, reviewId: item._id }).unwrap();
@@ -30,7 +28,7 @@ const Review = ({ id, item, userInfo }: Props) => {
   };
 
   return (
-    <article className="flex gap-8 p-4 rounded-bl-xl rounded-tr-xl relative">
+    <article className="flex p-4 rounded-bl-xl rounded-tr-xl relative">
       <section className="flex flex-col gap-2 w-[8ch]">
         <img
           src={item.userImage}
@@ -55,10 +53,10 @@ const Review = ({ id, item, userInfo }: Props) => {
       {/* DELETE REVIEW */}
       {(userInfo?._id === item.userId || userInfo?.isAdmin) && (
         <div
-          className="absolute top-0 right-0 cursor-pointer bg-red p-2 rounded-lg"
+          className="absolute top-0 right-0 cursor-pointer p-2 rounded-lg text-red text-3xl"
           onClick={() => setIsModalOpen(true)}
         >
-          <FaTrash className="text-sm" />
+          &times;
         </div>
       )}
 

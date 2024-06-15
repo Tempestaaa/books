@@ -10,6 +10,25 @@ type Props = {
 
 const BookDetails = ({ book }: Props) => {
   const [isShowMore, setIsShowMore] = useState(false);
+  const [showMoreGenres, setShowMoreGenres] = useState(false);
+
+  const slicedGenres = book?.genres.slice(0, 5).map((item) => (
+    <div
+      key={item._id}
+      className="px-2 py-1 border-b-2 border-green capitalize cursor-pointer text-xs lg:text-sm hover:text-gray hover:border-opacity-80 duration-300"
+    >
+      {item.name}
+    </div>
+  ));
+
+  const fullGenres = book?.genres.map((item) => (
+    <div
+      key={item._id}
+      className="px-2 py-1 border-b-2 border-green capitalize cursor-pointer text-xs lg:text-sm hover:text-gray hover:border-opacity-80 duration-300"
+    >
+      {item.name}
+    </div>
+  ));
 
   return (
     <article className="flex flex-col gap-4">
@@ -41,7 +60,7 @@ const BookDetails = ({ book }: Props) => {
         </p>
         <div
           onClick={() => setIsShowMore(!isShowMore)}
-          className="text-xs lg:text-sm border-b-2 border-green w-fit pb-1 cursor-pointer font-bold flex items-center gap-1"
+          className="text-xs lg:text-sm border-b-2 border-green w-fit pb-1 cursor-pointer font-bold flex items-center gap-1 hover:text-gray hover:border-opacity-80 duration-300"
         >
           <p>{isShowMore ? "Show less" : "Show more"}</p>
           <span>{isShowMore ? <LuChevronUp /> : <LuChevronDown />}</span>
@@ -51,14 +70,19 @@ const BookDetails = ({ book }: Props) => {
       {/* GENRES */}
       <section className="flex flex-wrap gap-3 items-center">
         <span>Genres</span>
-        {book?.genres.map((item) => (
-          <div
-            key={item._id}
-            className="px-2 py-1 border-b-2 border-green capitalize cursor-pointer text-xs lg:text-sm hover:text-gray hover:border-opacity-80 duration-300"
-          >
-            {item.name}
-          </div>
-        ))}
+        {showMoreGenres
+          ? fullGenres
+          : book?.genres.length! > 5 && (
+              <>
+                {slicedGenres}
+                <button
+                  className="text-xs font-bold"
+                  onClick={() => setShowMoreGenres(!showMoreGenres)}
+                >
+                  {showMoreGenres ? "Show less" : ". . ."}
+                </button>
+              </>
+            )}
       </section>
 
       {/* PAGES */}

@@ -61,7 +61,7 @@ const userApi = apiSlice.injectEndpoints({
       invalidatesTags: ["User"],
     }),
 
-    updatePassord: builder.mutation<User, PasswordUpdate>({
+    updatePassword: builder.mutation<User, PasswordUpdate>({
       query: (data) => ({
         url: `${USER_URL}/user`,
         method: "PUT",
@@ -115,7 +115,7 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useUpdateUserMutation,
-  useUpdatePassordMutation,
+  useUpdatePasswordMutation,
   useDeleteUserMutation,
   useDeleteUserByIdMutation,
   useAddFavouritesMutation,

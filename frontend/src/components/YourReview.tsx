@@ -44,10 +44,11 @@ const YourReview = ({ id, userInfo, rating, setRating }: Props) => {
   };
 
   return (
-    <form onSubmit={handleCreateReview} className="flex flex-col gap-2 lg:pr-4">
+    <form onSubmit={handleCreateReview} className="flex flex-col gap-2">
       <h1 className="text-3xl lg:text-4xl font-semibold mb-4">
         Rating & Review
       </h1>
+
       <Textarea
         rows={3}
         label=""
@@ -55,6 +56,7 @@ const YourReview = ({ id, userInfo, rating, setRating }: Props) => {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
+
       <div className="flex items-center justify-between gap-2 flex-col lg:flex-row">
         <div className="flex items-center gap-2">
           <CustomRating rating={rating} setRating={setRating} />
@@ -62,7 +64,11 @@ const YourReview = ({ id, userInfo, rating, setRating }: Props) => {
             Rating: {rating ? `${rating} / 5` : "0 / 5"}
           </span>
         </div>
-        <Button type="submit" className="bg-blue self-end lg:self-auto">
+
+        <Button
+          type="submit"
+          className="bg-blue self-end lg:self-auto hover:!bg-red duration-300 hover:font-bold"
+        >
           Review
         </Button>
       </div>
