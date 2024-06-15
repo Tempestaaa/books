@@ -66,7 +66,7 @@ const bookApi = apiSlice.injectEndpoints({
 
     deleteReviewAdmin: builder.mutation<
       {},
-      { book_Id: string; review_Id: string }
+      { bookId: string; reviewId: string }
     >({
       query: (data) => ({
         url: `${BOOK_URL}/admin/reviews`,

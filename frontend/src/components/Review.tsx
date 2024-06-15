@@ -20,7 +20,7 @@ const Review = ({ id, item, userInfo }: Props) => {
 
   const handleDelete = async () => {
     try {
-      await deleteReviewAdmin({ book_Id: id, review_Id: item._id }).unwrap();
+      await deleteReviewAdmin({ bookId: id, reviewId: item._id }).unwrap();
       toast.success("Review deleted");
     } catch (error: any) {
       toast.error(error?.data?.message || error.error);
@@ -40,7 +40,7 @@ const Review = ({ id, item, userInfo }: Props) => {
         <h1 className="text-xs truncate">@{item.userName}</h1>
       </section>
 
-      <div className="flex-1 rounded-xl px-4 flex flex-col gap-2">
+      <div className="flex-1 flex flex-col gap-2 border-b-2 border-green">
         <div className="flex items-center gap-1">
           {[...Array(5)].map((_, i) => (
             <FaStar
@@ -49,7 +49,7 @@ const Review = ({ id, item, userInfo }: Props) => {
             />
           ))}
         </div>
-        <p className="line-clamp-2">{item.comment}</p>
+        <p className="line-clamp-2 text-sm">{item.comment}</p>
       </div>
 
       {/* DELETE REVIEW */}
