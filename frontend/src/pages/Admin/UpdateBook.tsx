@@ -1,9 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { BookCreate, createForm } from "../../types/book.type";
-import { Button, FileInput, Label, TextInput } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { useGetGenresQuery } from "../../redux/features/genre.api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Select from "react-select";
 import {
   useGetBookQuery,

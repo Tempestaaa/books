@@ -13,11 +13,17 @@ const AreYouSure = ({ isOpen, setIsOpen, handler }: Props) => {
         <span className="text-2xl font-bold text-text">Are you sure?</span>
       </Modal.Header>
       <Modal.Footer className="flex justify-between">
-        <Button onClick={() => setIsOpen(false)} color="blue">
+        <Button
+          onClick={() => setIsOpen(false)}
+          className="bg-blue hover:!bg-red hover:font-bold duration-300"
+        >
           No
         </Button>
 
-        <Button onClick={handler} color="failure">
+        <Button
+          onClick={handler}
+          className="bg-blue hover:!bg-red hover:font-bold duration-300"
+        >
           Yes
         </Button>
       </Modal.Footer>

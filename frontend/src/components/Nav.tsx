@@ -46,24 +46,24 @@ const Nav = () => {
             <img
               src={userInfo.image}
               alt={userInfo.username}
-              className="w-10 aspect-square rounded-full border-2  absolute lg:static top-2 right-2"
+              className="w-10 aspect-square rounded-full border-2 absolute lg:static top-2 right-2"
             />
           )}
         >
-          <Dropdown.Header>
+          <Dropdown.Header className="text-primary">
             <span className="font-bold">@{userInfo.username}</span>
           </Dropdown.Header>
-          <Link to="/profile">
+          <Link to="/profile" className="text-primary">
             <Dropdown.Item>Profile</Dropdown.Item>
           </Link>
           {userInfo.isAdmin && (
-            <Link to="/dashboard">
+            <Link to="/dashboard" className="text-primary">
               <Dropdown.Item>Dashboard</Dropdown.Item>
             </Link>
           )}
           <Dropdown.Divider />
           <Dropdown.Item onClick={handleLogout}>
-            <span className="font-semibold text-secondary">Logout</span>
+            <span className="font-semibold bg-secondary">Logout</span>
           </Dropdown.Item>
         </Dropdown>
       ) : (

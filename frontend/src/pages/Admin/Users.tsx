@@ -32,9 +32,9 @@ const Users = () => {
         Users Management
       </h1>
 
-      <section className="overflow-x-auto lg:pr-2 bg-sub rounded-md">
+      <section className="overflow-x-auto lg:pr-2 rounded-md">
         <Table className="table-auto">
-          <Table.Head>
+          <Table.Head className="bg-blue">
             <Table.HeadCell>id</Table.HeadCell>
             <Table.HeadCell>avatar</Table.HeadCell>
             <Table.HeadCell>username</Table.HeadCell>
@@ -47,10 +47,13 @@ const Users = () => {
             {users?.map((item) => (
               <Table.Row
                 key={item._id}
-                className="capitalize hover:bg-text/20 group duration-300"
+                className="capitalize group duration-300 hover:bg-blue"
               >
                 <Table.Cell>
-                  <Tooltip className="normal-case" content={item._id}>
+                  <Tooltip
+                    className="normal-case bg-primary"
+                    content={item._id}
+                  >
                     <span className="group-hover:text-text">
                       {item._id.slice(0, 6)}...
                     </span>
@@ -82,16 +85,16 @@ const Users = () => {
                 <Table.Cell>
                   <span>
                     {item.isAdmin ? (
-                      <FaCheck className="text-green-500" />
+                      <FaCheck className="text-green" />
                     ) : (
-                      <FaTimes className="text-secondary" />
+                      <FaTimes className="text-red" />
                     )}
                   </span>
                 </Table.Cell>
 
                 <Table.Cell>
                   <Button
-                    color="failure"
+                    className="bg-red hover:!bg-red hover:opacity-80 hover:font-bold duration-300"
                     onClick={() => {
                       setId(item._id);
                       setIsModalOpen(true);

@@ -95,7 +95,7 @@ const Genres = () => {
           />
           {isUpdating && (
             <Button
-              color="blue"
+              className="bg-red hover:!bg-red hover:opacity-80 hover:font-bold duration-300"
               onClick={() => {
                 setIsUpdating(false);
                 setId("");
@@ -105,7 +105,11 @@ const Genres = () => {
               Cancel
             </Button>
           )}
-          <Button disabled={isUpdatingGenre} type="submit" color="failure">
+          <Button
+            disabled={isUpdatingGenre}
+            type="submit"
+            className="bg-blue hover:!bg-red hover:opacity-80 hover:font-bold duration-300"
+          >
             {isUpdating ? isUpdatingGenre ? <Loader /> : "Update" : "Create"}
           </Button>
         </form>
@@ -135,7 +139,7 @@ const Genres = () => {
               className="rounded-xl border-2 flex items-center justify-between overflow-hidden group"
             >
               <button
-                className="bg-secondary py-4 px-3 capitalize flex-1 group-hover:font-bold text-left group-hover:bg-secondary/80 duration-300"
+                className="py-2 px-4 capitalize flex-1 group-hover:font-bold text-left group-hover:bg-secondary/80 duration-300"
                 onClick={() => {
                   setIsUpdating(true);
                   setId(item._id);

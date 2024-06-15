@@ -14,7 +14,6 @@ import Reviews from "./pages/Admin/Reviews";
 import Genres from "./pages/Admin/Genres";
 import CreateBook from "./pages/Admin/CreateBook";
 import Profile from "./pages/User/Profile";
-import ChangePassword from "./pages/User/ChangePassword";
 import Favourites from "./pages/User/Favourites";
 import Book from "./pages/Public/Book";
 import UpdateBook from "./pages/Admin/UpdateBook";
@@ -32,7 +31,6 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="profile" element={<ProfileLayout />}>
             <Route index element={<Profile />} />
-            <Route path="change-password" element={<ChangePassword />} />
             <Route path="favourites" element={<Favourites />} />
           </Route>
         </Route>

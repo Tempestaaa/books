@@ -113,6 +113,7 @@ const CreateBook = () => {
             <Input label="Title" {...register("title")} error={errors.title} />
             <Textarea
               label="Description"
+              rows={3}
               {...register("desc")}
               error={errors.desc}
             />

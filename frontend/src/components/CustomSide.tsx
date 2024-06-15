@@ -54,9 +54,8 @@ const CustomSide = ({ tabs }: Props) => {
       <div className="border my-4 rounded-full"></div>
 
       <Button
-        color="failure"
+        className="bg-red hover:!bg-red hover:opacity-80 hover:font-bold duration-300 py-2"
         onClick={() => setIsModalOpen(true)}
-        className="py-2"
       >
         Logout
       </Button>

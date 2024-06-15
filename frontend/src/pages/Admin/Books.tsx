@@ -54,7 +54,7 @@ const Books = () => {
 
       <section className="w-full overflow-x-auto rounded-md h-full">
         <Table className="table-auto">
-          <Table.Head className="bg-black">
+          <Table.Head className="bg-blue">
             <Table.HeadCell>id</Table.HeadCell>
             <Table.HeadCell>cover</Table.HeadCell>
             <Table.HeadCell>title</Table.HeadCell>
@@ -125,12 +125,12 @@ const Books = () => {
                 <Table.Cell>
                   <div className="flex gap-2 items-center justify-center">
                     <Link to={`update/${item._id}`}>
-                      <Button color="warning">
+                      <Button className="bg-yellow hover:!bg-red hover:opacity-80 hover:font-bold duration-300">
                         <FaEdit />
                       </Button>
                     </Link>
                     <Button
-                      color="failure"
+                      className="bg-red hover:!bg-red hover:opacity-80 hover:font-bold duration-300"
                       onClick={() => {
                         setId(item._id);
                         setIsModalOpen(true);

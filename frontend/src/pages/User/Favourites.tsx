@@ -12,13 +12,13 @@ import CardFavourites from "../../components/CardFavourites";
 
 const Favourites = () => {
   const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const [id, setId] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: favourites } = useGetFavouritesQuery();
   const [deleteOne] = useDeleteFavouriteMutation();
   const [deleteAll] = useDeleteAllFavouritesMutation();
 
+  // DELETE ONE
   const handleDeleteOne = async () => {
     try {
       await deleteOne({ bookId: id! }).unwrap();
@@ -31,6 +31,7 @@ const Favourites = () => {
     setIsModalOpen(false);
   };
 
+  // DELETE ALL
   const handleDeleteAll = async () => {
     try {
       await deleteAll().unwrap();
@@ -40,30 +41,11 @@ const Favourites = () => {
     }
   };
 
-  // Pagination
-  const dataPerPage = 24;
-  const lastDataIndex = currentPage * dataPerPage;
-  const firstDataIndex = lastDataIndex - dataPerPage;
-  const currentData = favourites?.slice(firstDataIndex, lastDataIndex);
-
-  const onPageChange = (page: number) => setCurrentPage(page);
-
   return (
     <article className="w-full p-4 rounded-md flex flex-col gap-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
-          Favourites
-        </h1>
-
-        {Number(favourites?.length) > dataPerPage && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(Number(favourites?.length) / dataPerPage)}
-            onPageChange={onPageChange}
-            showIcons
-          />
-        )}
-      </div>
+      <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
+        Favourites
+      </h1>
 
       <div className="flex gap-4 items-end justify-between">
         <form className="w-full lg:w-1/2">
@@ -93,26 +75,18 @@ const Favourites = () => {
 
       <div className="border my-4 border-sub"></div>
 
-      <section className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
-        {currentData &&
-          currentData.length > 0 &&
-          currentData
-            .filter((item) => {
-              return search.toLowerCase() === ""
-                ? item
-                : item.title.toLowerCase().includes(search.toLowerCase());
-            })
-            .map((item) => (
-              <CardFavourites
-                key={item._id}
-                item={item}
-                setId={setId}
-                setIsModalOpen={setIsModalOpen}
-              />
-            ))}
+      <section className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
+        {favourites?.map((item) => (
+          <CardFavourites
+            key={item._id}
+            item={item}
+            setId={setId}
+            setIsModalOpen={setIsModalOpen}
+          />
+        ))}
 
-        {currentData?.length === 0 && (
-          <p className="font-bold">No favourites yet!</p>
+        {favourites?.length === 0 && (
+          <p className="text-xl">No favourites yet!</p>
         )}
       </section>
 

@@ -8,10 +8,6 @@ const ProfileLayout = () => {
       link: "",
     },
     {
-      name: "Change password",
-      link: "change-password",
-    },
-    {
       name: "Favourites",
       link: "favourites",
     },
