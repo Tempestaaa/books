@@ -176,12 +176,15 @@ const CreateBook = () => {
             </div>
 
             <div className="flex items-center justify-between mt-4">
-              <Button color="blue" onClick={handleReset}>
+              <Button
+                className="bg-blue hover:!bg-red hover:opacity-80 hover:font-bold duration-300"
+                onClick={handleReset}
+              >
                 Reset
               </Button>
               <Button
                 type="submit"
-                color="failure"
+                className="bg-blue hover:!bg-red hover:opacity-80 hover:font-bold duration-300"
                 disabled={isCreatingBook || isUploadingCover}
               >
                 {isCreatingBook || isUploadingCover ? <Loader /> : "Create"}
