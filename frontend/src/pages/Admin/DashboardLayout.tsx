@@ -13,7 +13,7 @@ const DashboardLayout = () => {
     },
     {
       name: "Create book",
-      link: "create-book",
+      link: "create",
     },
     {
       name: "Users",

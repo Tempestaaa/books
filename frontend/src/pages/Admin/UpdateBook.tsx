@@ -1,9 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { BookCreate, createForm } from "../../types/book.type";
-import { Button, FileInput, Label, TextInput, Textarea } from "flowbite-react";
+import { Button, FileInput, Label, TextInput } from "flowbite-react";
 import { useGetGenresQuery } from "../../redux/features/genre.api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import {
   useGetBookQuery,
@@ -12,6 +12,9 @@ import {
 } from "../../redux/features/book.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Input from "../../components/Input";
+import Textarea from "../../components/Textarea";
+import Loader from "../../components/Loader";
 
 const CreateBook = () => {
   const navigate = useNavigate();
@@ -29,20 +32,31 @@ const CreateBook = () => {
     values: book,
   });
 
-  const [preview, setPreview] = useState<File>();
+  const [posterPath, setPosterPath] = useState<File | undefined>();
+  const [image, setImage] = useState(book?.coverImage);
   const [uploadCover, { isLoading: isUploadingCover }] =
     useUploadCoverMutation();
   const [updateBook] = useUpdateBookMutation();
 
+  // RESET FORM
   const handleReset = () => {
     reset();
-    setPreview(undefined);
+    setPosterPath(undefined);
   };
 
+  // FILE INPUT
+  const handlePoster = async (e: React.FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement & {
+      files: FileList;
+    };
+    setPosterPath(target.files[0]);
+  };
+
+  // UPDATE BOOK
   const onSubmit: SubmitHandler<BookCreate> = async (data) => {
     try {
       await updateBook({ _id: id as string, data }).unwrap();
-      toast.success("Book updated successfully");
+      toast.success("Book updated");
       navigate("/dashboard/books");
     } catch (error: any) {
       return toast.error(error?.data?.message || error.error);
@@ -50,102 +64,108 @@ const CreateBook = () => {
   };
 
   return (
-    <div className="bg-sub w-full h-full p-4 rounded-md flex flex-col gap-4">
+    <div className="w-full h-full lg:p-4 rounded-md flex flex-col">
       <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
         Update Book
       </h1>
 
-      <article>
+      <div className="my-4 border" />
+
+      <article className="w-full my-auto rounded-xl">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col lg:flex-row gap-4"
+          className="flex flex-col lg:flex-row gap-4 w-full"
         >
-          <section className="lg:w-96 max-h-[520px] border-2 border-dashed border-blue-500 rounded-md overflow-hidden">
-            <Label>
-              <div className="w-full h-full">
-                <img
-                  src={book?.coverImage}
-                  alt="Poster"
-                  className="bg-sub w-full h-full p-2"
-                />
-              </div>
-              <FileInput
-                accept="image/*"
-                className="hidden"
-                onChange={(e) =>
-                  e.target.files && setPreview(e.target.files[0])
-                }
+          <label className="h-[420px] lg:w-[360px] p-4 rounded-xl border">
+            {(image || posterPath) && (
+              <img
+                src={image ? image : URL.createObjectURL(posterPath as File)}
+                alt="Cover"
+                className="mx-auto h-full w-full rounded-xl object-fill"
               />
-            </Label>
-          </section>
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              disabled={isUploadingCover}
+              onChange={handlePoster}
+            />
+          </label>
 
           <section className="flex-1">
-            <Label data-form="create">
-              Title:
-              <TextInput {...register("title")} className="capitalize" />
-            </Label>
+            <Input label="Title" {...register("title")} error={errors.title} />
+            <Textarea
+              label="Description"
+              rows={3}
+              {...register("desc")}
+              error={errors.desc}
+            />
+            <Input
+              label="Author"
+              {...register("author")}
+              error={errors.author}
+            />
 
-            <Label data-form="create">
-              Description:
-              <Textarea
-                {...register("desc")}
-                rows={5}
-                className={`${errors.desc} && "!border-secondary"`}
-              />
-            </Label>
-
-            <Label data-form="create">
-              Author:
-              <TextInput
-                {...register("author")}
-                className={`${errors.author} && "!border-secondary"`}
-              />
-            </Label>
-
-            <Label data-form="create">
+            <label data-form="create">
               Genres:
               <Controller
                 name="genres"
                 control={control}
                 render={({ field }) => (
-                  <Select
-                    {...field}
-                    options={genres}
-                    getOptionLabel={(options) => options["name"]}
-                    getOptionValue={(options) => options["_id"]}
-                    isMulti
-                    isClearable
-                    className="focus:!border-primary text-primary capitalize"
-                  />
+                  <>
+                    <Select
+                      {...field}
+                      options={genres}
+                      getOptionLabel={(options) => options["name"]}
+                      getOptionValue={(options) => options["_id"]}
+                      isMulti
+                      isClearable
+                      className="text-primary capitalize"
+                    />
+                    {errors.genres && (
+                      <p className="text-xs text-secondary">
+                        {errors.genres.message}
+                      </p>
+                    )}
+                  </>
                 )}
               />
-            </Label>
-
-            <Label data-form="create">
-              Pages:
-              <TextInput
-                {...register("pages")}
-                type="number"
-                className={`${errors.pages} && "!border-secondary"`}
+            </label>
+            <div className="grid lg:grid-cols-2 lg:gap-4">
+              <Input
+                label="Format"
+                {...register("format")}
+                error={errors.format}
               />
-            </Label>
-
-            <Label data-form="create">
-              Rating:
-              <TextInput
-                {...register("rating")}
+              <Input
+                label="Language"
+                {...register("language")}
+                error={errors.language}
+              />
+            </div>
+            <div className="grid lg:grid-cols-2 lg:gap-4">
+              <Input
+                label="Pages"
+                type="number"
+                {...register("pages")}
+                error={errors.pages}
+              />
+              <Input
+                label="Rating"
                 type="number"
                 step="any"
-                className={`${errors.rating} && "!border-secondary"`}
+                {...register("rating")}
+                error={errors.rating}
               />
-            </Label>
+            </div>
 
             <div className="flex items-center justify-between mt-4">
               <Button color="blue" onClick={handleReset}>
                 Reset
               </Button>
-              <Button type="submit" color="failure">
-                Update
+              <Button type="submit" color="failure" disabled={isUploadingCover}>
+                {isUploadingCover ? <Loader /> : "Update"}
               </Button>
             </div>
           </section>

@@ -128,15 +128,22 @@ const CreateBook = () => {
                 name="genres"
                 control={control}
                 render={({ field }) => (
-                  <Select
-                    {...field}
-                    options={genres}
-                    getOptionLabel={(options) => options["name"]}
-                    getOptionValue={(options) => options["_id"]}
-                    isMulti
-                    isClearable
-                    className="text-primary capitalize"
-                  />
+                  <>
+                    <Select
+                      {...field}
+                      options={genres}
+                      getOptionLabel={(options) => options["name"]}
+                      getOptionValue={(options) => options["_id"]}
+                      isMulti
+                      isClearable
+                      className="text-primary capitalize"
+                    />
+                    {errors.genres && (
+                      <p className="text-xs text-secondary">
+                        {errors.genres.message}
+                      </p>
+                    )}
+                  </>
                 )}
               />
             </label>

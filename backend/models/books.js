@@ -49,7 +49,6 @@ const bookSchema = mongoose.Schema(
     rating: {
       type: Number,
       required: [true, "Rating is required"],
-      default: 0,
     },
     format: {
       type: String,

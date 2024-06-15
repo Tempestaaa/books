@@ -16,7 +16,7 @@ import CreateBook from "./pages/Admin/CreateBook";
 import Profile from "./pages/User/Profile";
 import ChangePassword from "./pages/User/ChangePassword";
 import Favourites from "./pages/User/Favourites";
-import BookDetails from "./pages/Public/BookDetails";
+import Book from "./pages/Public/Book";
 import UpdateBook from "./pages/Admin/UpdateBook";
 
 const App = () => {
@@ -26,7 +26,7 @@ const App = () => {
       <Route path="register" element={<Register />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="book/:id" element={<BookDetails />} />
+        <Route path="book/:id" element={<Book />} />
 
         {/* Private */}
         <Route element={<PrivateRoute />}>
@@ -45,8 +45,8 @@ const App = () => {
             <Route path="users" element={<Users />} />
             <Route path="reviews" element={<Reviews />} />
             <Route path="genres" element={<Genres />} />
-            <Route path="create-book" element={<CreateBook />} />
-            <Route path="update-book/:id" element={<UpdateBook />} />
+            <Route path="create" element={<CreateBook />} />
+            <Route path="books/update/:id" element={<UpdateBook />} />
           </Route>
         </Route>
       </Route>

@@ -195,7 +195,7 @@ export const deleteFavourites = expressAsyncHandler(async (req, res) => {
 });
 // ========== ADMIN ==========
 export const getUsers = expressAsyncHandler(async (req, res) => {
-  const page = Number(req.query.pageNumber) || 1;
+  const page = Number(req.query.page) || 1;
   const limit = 6;
   const skip = (page - 1) * limit;
 
@@ -211,6 +211,11 @@ export const getUsers = expressAsyncHandler(async (req, res) => {
 
 export const deleteUserById = expressAsyncHandler(async (req, res) => {
   const user = await Users.findById(req.params.id);
+
+  if (user.isAdmin) {
+    res.status(400);
+    throw new Error("Admin user can't be deleted");
+  }
 
   if (user) {
     try {

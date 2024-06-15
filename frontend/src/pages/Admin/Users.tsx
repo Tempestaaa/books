@@ -26,30 +26,11 @@ const Users = () => {
     setIsModalOpen(false);
   };
 
-  // Pagination
-  const dataPerPage = 6;
-  const lastDataIndex = currentPage * dataPerPage;
-  const firstDataIndex = lastDataIndex - dataPerPage;
-  const currentData = users?.slice(firstDataIndex, lastDataIndex);
-
-  const onPageChange = (page: number) => setCurrentPage(page);
-
   return (
     <div className="w-full p-4 rounded-md flex flex-col gap-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
-          Users Management
-        </h1>
-
-        {Number(users?.length) > dataPerPage && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(Number(users?.length) / dataPerPage)}
-            onPageChange={onPageChange}
-            showIcons
-          />
-        )}
-      </div>
+      <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
+        Users Management
+      </h1>
 
       <section className="overflow-x-auto lg:pr-2 bg-sub rounded-md">
         <Table className="table-auto">
@@ -63,7 +44,7 @@ const Users = () => {
           </Table.Head>
 
           <Table.Body>
-            {currentData?.map((item) => (
+            {users?.map((item) => (
               <Table.Row
                 key={item._id}
                 className="capitalize hover:bg-text/20 group duration-300"

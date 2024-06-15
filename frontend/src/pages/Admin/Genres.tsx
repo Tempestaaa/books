@@ -1,4 +1,4 @@
-import { Button, Label, Pagination, TextInput } from "flowbite-react";
+import { Button } from "flowbite-react";
 import {
   useCreateGenreMutation,
   useDeleteGenreMutation,
@@ -10,13 +10,13 @@ import { FaTimes } from "react-icons/fa";
 import { useRef, useState } from "react";
 import AreYouSure from "../../components/AreYouSure";
 import Loader from "../../components/Loader";
+import Input from "../../components/Input";
 
 const Genres = () => {
   const [name, setName] = useState("");
   const [search, setSearch] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
   const [id, setId] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null!);
 
@@ -74,29 +74,12 @@ const Genres = () => {
     setIsUpdating(false);
   };
 
-  // Pagination
-  const dataPerPage = 24;
-  const lastDataIndex = currentPage * dataPerPage;
-  const firstDataIndex = lastDataIndex - dataPerPage;
-  const currentData = genres?.slice(firstDataIndex, lastDataIndex);
-
-  const onPageChange = (page: number) => setCurrentPage(page);
-
   return (
     <div className="w-full p-4 rounded-md flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <h1 className="text-4xl font-semibold text-center lg:text-left uppercase">
           Genres Management
         </h1>
-
-        {Number(genres?.length) > dataPerPage && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(Number(genres?.length) / dataPerPage)}
-            onPageChange={onPageChange}
-            showIcons
-          />
-        )}
       </div>
 
       <div className="flex flex-col lg:flex-row gap-2">
@@ -104,14 +87,12 @@ const Genres = () => {
           onSubmit={isUpdating ? handleUpdate : handleCreate}
           className="flex-1 flex items-end gap-2"
         >
-          <Label data-form="create" className="flex-1">
-            Name:
-            <TextInput
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              ref={nameRef}
-            />
-          </Label>
+          <Input
+            label="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            ref={nameRef}
+          />
           {isUpdating && (
             <Button
               color="blue"
@@ -130,64 +111,52 @@ const Genres = () => {
         </form>
 
         <form className="flex-1 flex items-end gap-2">
-          <Label data-form="create" className="flex-1 relative">
-            Search:
-            <TextInput
-              data-input="search"
-              disabled={isUpdatingGenre}
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            {search !== "" && (
-              <div
-                className="absolute top-5 right-2 text-4xl text-secondary cursor-pointer"
-                onClick={() => setSearch("")}
-              >
-                &times;
-              </div>
-            )}
-          </Label>
+          <Input
+            type="search"
+            label="Search"
+            disabled={isUpdatingGenre}
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </form>
       </div>
 
       <section className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 py-6 rounded-md">
-        {currentData &&
-          currentData.length > 0 &&
-          currentData
-            ?.filter((item) => {
-              return search.toLowerCase() === ""
-                ? item
-                : item.name.toLowerCase().includes(search.toLowerCase());
-            })
-            .map((item) => (
-              <div
-                key={item._id}
-                className="rounded-xl border-2 flex items-center justify-between overflow-hidden group"
+        {genres
+          ?.filter((item) => {
+            return search.toLowerCase() === ""
+              ? item
+              : item.name.toLowerCase().includes(search.toLowerCase());
+          })
+          .map((item) => (
+            <div
+              key={item._id}
+              className="rounded-xl border-2 flex items-center justify-between overflow-hidden group"
+            >
+              <button
+                className="bg-secondary py-4 px-3 capitalize flex-1 group-hover:font-bold text-left group-hover:bg-secondary/80 duration-300"
+                onClick={() => {
+                  setIsUpdating(true);
+                  setId(item._id);
+                  setName(item.name);
+                }}
               >
-                <button
-                  className="bg-secondary py-4 px-3 capitalize flex-1 group-hover:font-bold text-left group-hover:bg-secondary/80 duration-300"
-                  onClick={() => {
-                    setIsUpdating(true);
-                    setId(item._id);
-                    setName(item.name);
-                  }}
-                >
-                  {item.name}
-                </button>
-                <span
-                  className="p-2 cursor-pointer"
-                  onClick={() => {
-                    setId(item._id);
-                    setIsModalOpen(true);
-                  }}
-                >
-                  <FaTimes />
-                </span>
-              </div>
-            ))}
+                {item.name}
+              </button>
+              <span
+                className="p-2 cursor-pointer"
+                onClick={() => {
+                  setId(item._id);
+                  setIsModalOpen(true);
+                }}
+              >
+                <FaTimes />
+              </span>
+            </div>
+          ))}
 
-        {currentData?.length === 0 && <p>No genres created yet!</p>}
+        {genres?.length === 0 && <p>No genres created yet!</p>}
       </section>
 
       {/* Modal */}

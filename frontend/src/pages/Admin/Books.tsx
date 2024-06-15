@@ -52,7 +52,7 @@ const Books = () => {
         )}
       </div>
 
-      <section className="overflow-x-auto bg-sub rounded-md">
+      <section className="overflow-x-auto rounded-md h-full">
         <Table className="table-auto">
           <Table.Head>
             <Table.HeadCell>id</Table.HeadCell>
@@ -124,7 +124,7 @@ const Books = () => {
                 </Table.Cell>
                 <Table.Cell>
                   <div className="flex gap-2 items-center justify-center">
-                    <Link to={`/dashboard/update-book/${item._id}`}>
+                    <Link to={`update/${item._id}`}>
                       <Button color="warning">
                         <FaEdit />
                       </Button>
