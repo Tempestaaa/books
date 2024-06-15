@@ -1,4 +1,4 @@
-import { FaStar, FaTimes } from "react-icons/fa";
+import { FaStar, FaTimes, FaTrash } from "react-icons/fa";
 import { ReviewType } from "../types/review.type";
 import { useState } from "react";
 import { User } from "../types/user.type";
@@ -16,10 +16,12 @@ const Review = ({ id, item, userInfo }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteReviewAdmin] = useDeleteReviewAdminMutation();
 
+  console.log(id);
+
   const handleDelete = async () => {
     try {
       await deleteReviewAdmin({ book_Id: id, review_Id: item._id }).unwrap();
-      toast.success("Review deleted successfully");
+      toast.success("Review deleted");
     } catch (error: any) {
       toast.error(error?.data?.message || error.error);
     }
@@ -28,32 +30,35 @@ const Review = ({ id, item, userInfo }: Props) => {
   };
 
   return (
-    <article className="flex gap-8 border-2 border-sub p-4 rounded-bl-xl rounded-tr-xl relative">
-      <div className="flex flex-col gap-2">
+    <article className="flex gap-8 p-4 rounded-bl-xl rounded-tr-xl relative">
+      <section className="flex flex-col gap-2 w-[8ch]">
         <img
           src={item.userImage}
           alt={`${item.userName} avatar`}
-          className="w-12 lg:w-16 aspect-square rounded-full border-2"
+          className="w-12 aspect-square rounded-full border-2"
         />
-        <h1 className="capitalize font-bold text-xs lg:text-sm text-center">
-          {item.userName}
-        </h1>
-      </div>
+        <h1 className="text-xs truncate">@{item.userName}</h1>
+      </section>
 
       <div className="flex-1 rounded-xl px-4 flex flex-col gap-2">
         <div className="flex items-center gap-1">
-          <FaStar className="text-yellow-400" />
-          <span>{item.rating}</span>
+          {[...Array(5)].map((_, i) => (
+            <FaStar
+              key={i}
+              className={item.rating > i ? "text-yellow" : "text-gray"}
+            />
+          ))}
         </div>
         <p className="line-clamp-2">{item.comment}</p>
       </div>
 
+      {/* DELETE REVIEW */}
       {(userInfo?._id === item.userId || userInfo?.isAdmin) && (
         <div
-          className="absolute top-4 right-4 text-secondary cursor-pointer"
+          className="absolute top-0 right-0 cursor-pointer bg-red p-2 rounded-lg"
           onClick={() => setIsModalOpen(true)}
         >
-          <FaTimes />
+          <FaTrash className="text-sm" />
         </div>
       )}
 

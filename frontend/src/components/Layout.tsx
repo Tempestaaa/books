@@ -4,12 +4,12 @@ import { Bounce, ToastContainer } from "react-toastify";
 
 const Layout = () => {
   return (
-    <div className="bg-primary min-h-svh text-white flex flex-col font-default">
+    <div className="bg-primary h-svh text-white flex flex-col font-default">
       <div>
         <Nav />
       </div>
 
-      <div className="flex-1">
+      <div className="flex-1 lg:max-h-svh lg:overflow-hidden">
         <Outlet />
       </div>
 

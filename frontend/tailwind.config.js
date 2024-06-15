@@ -1,4 +1,5 @@
 import flowbite from "flowbite-react/tailwind";
+import color, { blue } from "tailwindcss/colors";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -11,6 +12,11 @@ export default {
         text: "#fff",
         sub: "#222222",
         failure: "#C81E1E",
+        red: color.red[600],
+        blue: color.blue[600],
+        green: color.green[400],
+        yellow: color.yellow[400],
+        gray: color.gray[400],
       },
       fontFamily: {
         default: '"Montserrat", sans-serif',

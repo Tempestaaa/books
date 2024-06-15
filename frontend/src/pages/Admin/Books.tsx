@@ -52,9 +52,9 @@ const Books = () => {
         )}
       </div>
 
-      <section className="overflow-x-auto rounded-md h-full">
+      <section className="w-full overflow-x-auto rounded-md h-full">
         <Table className="table-auto">
-          <Table.Head>
+          <Table.Head className="bg-black">
             <Table.HeadCell>id</Table.HeadCell>
             <Table.HeadCell>cover</Table.HeadCell>
             <Table.HeadCell>title</Table.HeadCell>
@@ -69,7 +69,7 @@ const Books = () => {
             {currentData?.map((item) => (
               <Table.Row
                 key={item._id}
-                className="capitalize hover:bg-text/20 group duration-300"
+                className="capitalize hover:bg-blue group duration-300"
               >
                 <Table.Cell>
                   <Tooltip className="normal-case" content={item._id}>

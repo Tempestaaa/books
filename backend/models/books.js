@@ -5,8 +5,12 @@ const reviewSchema = mongoose.Schema(
     userId: { type: String, required: true },
     userName: { type: String, required: true },
     userImage: { type: String, required: true },
-    rating: { type: Number, required: true },
-    comment: { type: String, required: true, trim: true },
+    rating: { type: Number, required: [true, "Rating is required"] },
+    comment: {
+      type: String,
+      required: [true, "Comment is required"],
+      trim: true,
+    },
   },
   {
     timestamps: true,

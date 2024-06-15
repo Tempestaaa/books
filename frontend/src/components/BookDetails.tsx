@@ -1,68 +1,79 @@
 import { FaStar } from "react-icons/fa";
 import { Book } from "../types/book.type";
 import { LuDot } from "react-icons/lu";
+import { useState } from "react";
+import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 
 type Props = {
   book: Book | undefined;
-  isShowMore: boolean;
-  setIsShowMore: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const BookDetails = ({ book, isShowMore, setIsShowMore }: Props) => {
+const BookDetails = ({ book }: Props) => {
+  const [isShowMore, setIsShowMore] = useState(false);
+
   return (
-    <div className="flex flex-col gap-4 pb-16">
+    <article className="flex flex-col gap-4">
       {/* TITLE */}
-      <h1 className="capitalize text-3xl lg:text-4xl font-medium">
+      <h1 className="capitalize text-4xl lg:text-5xl font-bold line-clamp-2">
         {book?.title}
       </h1>
 
       {/* AUTHOR */}
-      <h2 className="capitalize text-lg lg:text-2xl">{book?.author}</h2>
+      <h2 className="capitalize text-lg lg:text-xl">{book?.author}</h2>
 
       {/* RATING */}
-      <div className="flex items-center gap-2">
-        <FaStar size={32} className="text-yellow-300" />
+      <section className="flex items-center gap-2">
+        <FaStar size={28} className="text-yellow" />
         <span className="text-xl">{book?.rating}</span>
-        <span className="text-xs text-text/50">
+        <span className="text-xs text-gray">
           {book?.numberOfReviews} reviews
         </span>
-      </div>
+      </section>
 
       {/* DESCRIPTION */}
-      <p
-        className={`${
-          isShowMore ? "" : "line-clamp-4 lg:line-clamp-3"
-        } text-sm lg:text-base`}
-      >
-        {book?.desc}
-      </p>
-      <div
-        onClick={() => setIsShowMore(!isShowMore)}
-        className="text-xs lg:text-sm border-b-2 border-green-600 w-fit pb-1 cursor-pointer font-bold"
-      >
-        {isShowMore ? "Show less" : "Show more"}
-      </div>
+      <section className="flex flex-col gap-1">
+        <p
+          className={`${
+            isShowMore ? "" : "line-clamp-4 lg:line-clamp-3"
+          } text-sm lg:text-base max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-track-sub scrollbar-thumb-green`}
+        >
+          {book?.desc}
+        </p>
+        <div
+          onClick={() => setIsShowMore(!isShowMore)}
+          className="text-xs lg:text-sm border-b-2 border-green w-fit pb-1 cursor-pointer font-bold flex items-center gap-1"
+        >
+          <p>{isShowMore ? "Show less" : "Show more"}</p>
+          <span>{isShowMore ? <LuChevronUp /> : <LuChevronDown />}</span>
+        </div>
+      </section>
 
       {/* GENRES */}
-      <div className="flex flex-wrap gap-3 items-center">
+      <section className="flex flex-wrap gap-3 items-center">
         <span>Genres</span>
         {book?.genres.map((item) => (
           <div
             key={item._id}
-            className="p-2 border-b-2 border-green-600 capitalize cursor-pointer text-xs lg:text-sm"
+            className="px-2 py-1 border-b-2 border-green capitalize cursor-pointer text-xs lg:text-sm hover:text-gray hover:border-opacity-80 duration-300"
           >
             {item.name}
           </div>
         ))}
-      </div>
+      </section>
 
       {/* PAGES */}
-      <div className="flex items-center gap-1 text-xs">
+      <section className="flex items-center gap-1 text-xs text-gray">
         <p>{book?.pages} pages</p>
         <LuDot />
         <p>{book?.format}</p>
-      </div>
-    </div>
+      </section>
+
+      {/* FIRST PUBLISHED */}
+      <section className="flex items-center gap-1 text-xs text-gray">
+        <p>First Published</p>
+        {/* WIP */}
+      </section>
+    </article>
   );
 };
 
