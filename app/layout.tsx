@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import Navbar from "@/components/public/shared/navbar";
+import Footer from "@/components/public/shared/footer";
+import { Suspense } from "react";
+import DefaultLoading from "@/components/loading/default-loading";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const defaultFont = Montserrat({
   subsets: ["latin"],
 });
 
@@ -23,11 +23,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased ${defaultFont.className} overflow-x-hidden`}
       >
-        {children}
+        <Suspense fallback={<DefaultLoading />}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
+            {children}
+            <Footer />
+
+            <Toaster richColors />
+          </ThemeProvider>
+        </Suspense>
       </body>
     </html>
   );
