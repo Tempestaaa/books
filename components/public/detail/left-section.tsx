@@ -8,7 +8,7 @@ import {
 
 export default function LeftSection() {
   return (
-    <section className="w-xs border-r-2 border-muted pr-4 flex flex-col gap-2">
+    <section className="w-full md:w-xs border-none md:border-r-2 border-muted md:pr-4 flex flex-col gap-2">
       <div className="bg-muted rounded-2xl h-110"></div>
 
       <div className="mt-2 flex flex-col gap-4">

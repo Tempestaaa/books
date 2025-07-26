@@ -13,7 +13,7 @@ export default function DisplayGrid() {
         </Button>
       </section>
 
-      <section className="grid grid-cols-4 gap-8">
+      <section className="grid grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] gap-8">
         {[...Array(8)].map((_, id) => (
           <BookCard key={id} />
         ))}

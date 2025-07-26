@@ -35,7 +35,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Navbar />
-            {children}
+            <div className="px-4">{children}</div>
             <Footer />
 
             <Toaster richColors />

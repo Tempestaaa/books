@@ -15,7 +15,7 @@ export default function CartPage() {
       <DynamicBreadcrumb items={breadcrumbs} />
       <header className="text-3xl font-bold">Shopping Cart</header>
 
-      <section className="flex gap-8 mt-4">
+      <section className="flex flex-col md:flex-row gap-4 lg:gap-8 mt-4">
         <CartList />
         <CartTotal />
       </section>

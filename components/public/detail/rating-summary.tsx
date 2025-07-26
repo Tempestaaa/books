@@ -27,11 +27,11 @@ export default function RatingSummary() {
         {totalRatings === 0 ? (
           <p className="text-center text-muted-foreground">No reviews yet.</p>
         ) : (
-          <ul>
+          <ul className="space-y-2 md:space-y-0">
             {ratingLevels.map((star) => (
               <li
                 key={star}
-                className="flex items-center gap-4 border-2 border-transparent hover:border-muted-foreground duration-300 pr-6 pl-2 py-1 rounded-2xl"
+                className="flex items-center gap-4 border-2 border-transparent hover:border-muted-foreground duration-300 md:pr-6 md:pl-2 md:py-1 rounded-md md:rounded-2xl relative"
               >
                 <div className="flex items-center gap-1 w-10 justify-end-safe">
                   <span className="text-base">{star}</span>
@@ -46,11 +46,11 @@ export default function RatingSummary() {
                         ratings[star as keyof typeof ratings]
                       )}%`,
                     }}
-                  ></div>
+                  />
                 </div>
 
-                <div className="w-20 text-right flex flex-col">
-                  <span className="text-foreground">
+                <div className="w-20 text-right flex flex-row md:flex-col absolute md:static top-1/2 -translate-y-1/2 md:-translate-y-0 right-1 text-xs md:text-sm">
+                  <span className="text-foreground ml-auto md:ml-0">
                     {ratings[star as keyof typeof ratings].toLocaleString()}
                   </span>
                   <span className="text-muted-foreground">

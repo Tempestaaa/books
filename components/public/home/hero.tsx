@@ -9,7 +9,7 @@ export default function Hero() {
 
   return (
     <section
-      className="h-140 rounded-2xl p-8 flex gap-8 hero-radial"
+      className="h-140 rounded-2xl flex flex-col lg:flex-row gap-8 hero-radial"
       // style={{
       //   "--background-image-url": `url('${backgroundImage}')`,
       // }}

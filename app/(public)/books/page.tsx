@@ -12,7 +12,7 @@ export default function BookListingPage() {
   ];
 
   return (
-    <div className="flex gap-8 divide-x-2 !py-0">
+    <div className="flex flex-col md:flex-row gap-8 divide-x-2 !py-0">
       <FilterSidebar />
 
       <div className="flex-1 py-4 space-y-4">

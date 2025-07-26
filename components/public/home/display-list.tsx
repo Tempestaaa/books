@@ -26,15 +26,29 @@ export default function DisplayList({ header, showSerial = false }: Props) {
 
       <section className="relative">
         <Swiper
-          spaceBetween={24}
-          slidesPerView={4}
+          spaceBetween={12}
+          slidesPerView={1}
           modules={[Navigation]}
           navigation={{
             prevEl: "#prev-btn",
             nextEl: "#next-btn",
           }}
+          breakpoints={{
+            375: {
+              slidesPerView: 1.5,
+            },
+            765: {
+              slidesPerView: 2.5,
+            },
+            1024: {
+              slidesPerView: 3.5,
+            },
+            1440: {
+              slidesPerView: 4.5,
+            },
+          }}
         >
-          {[...Array(20)].map((_, id) => (
+          {[...Array(10)].map((_, id) => (
             <SwiperSlide key={id} className="p-1">
               <BookCard serial={id + 1} showSerial={showSerial} />
             </SwiperSlide>

@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function DetailTabs() {
   return (
     <Tabs defaultValue="details" className="mt-8 space-y-2">
-      <TabsList className="w-xs">
+      <TabsList className="w-full md:w-xs">
         <TabsTrigger value="details">Details</TabsTrigger>
         <TabsTrigger value="reviews">Reviews</TabsTrigger>
       </TabsList>

@@ -19,11 +19,11 @@ export default function AboutPage() {
       <section className="flex flex-col">
         <div className="bg-[url('/images/about-us.jpg')] bg-center bg-no-repeat bg-cover h-80 rounded-2xl shadow-xs shadow-foreground" />
         <AboutUsSection />
-        <Separator className="!w-xs mx-auto py" />
+        <Separator className="md:!w-xs mx-auto" />
         <OurMissionSection />
-        <Separator className="!w-xs mx-auto py" />
+        <Separator className="md:!w-xs mx-auto" />
         <ValuesSection />
-        <Separator className="!w-xs mx-auto py" />
+        <Separator className="md:!w-xs mx-auto" />
         <ThankYouSection />
       </section>
     </div>

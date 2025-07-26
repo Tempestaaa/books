@@ -2,9 +2,12 @@ import { footer } from "@/lib/common";
 
 export default function FooterMenu() {
   return (
-    <ul className="flex-center gap-20 justify-end-safe">
+    <ul className="flex-center gap-20 justify-between sm:justify-end-safe w-full">
       {footer.map((item) => (
-        <li key={item.label} className="space-y-4">
+        <li
+          key={item.label}
+          className="space-y-2 md:space-y-4 text-center md:text-start"
+        >
           <header className="text-subheading">{item.label}</header>
 
           <ul className="flex flex-col">

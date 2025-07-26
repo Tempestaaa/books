@@ -5,7 +5,7 @@ import { PencilLineIcon } from "lucide-react";
 export default function CommunityReviews() {
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex-center gap-4 justify-between">
+      <div className="flex flex-col md:flex-row md:items-center-safe gap-2 md:gap-4 justify-between">
         <header className="text-xl font-bold">Community Reviews</header>
         <Button>
           <span>Write a review</span>

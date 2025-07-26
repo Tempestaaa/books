@@ -5,7 +5,7 @@ import RightSection from "@/components/public/detail/right-section";
 export default function BookDetailPage() {
   return (
     <div className="!py-0">
-      <div className="flex *:py-4 border-b-2 border-muted">
+      <div className="flex flex-col md:flex-row *:py-4 border-b-2 border-muted">
         <LeftSection />
         <RightSection />
       </div>

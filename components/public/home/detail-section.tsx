@@ -6,12 +6,12 @@ import Link from "next/link";
 
 export default function DetailSection() {
   return (
-    <section className="w-1/3 h-full rounded-md flex flex-col">
+    <section className="w-full lg:w-1/3 h-fit lg:h-full rounded-md flex flex-col justify-center-safe">
       <header className="text-3xl font-bold">Book title</header>
 
       <p className="text-muted-foreground">by Author name</p>
 
-      <ul className="flex-center gap-2 mt-2">
+      <ul className="flex-center gap-2 mt-2 flex-wrap">
         {genres.slice(0, 4).map((item) => (
           <Badge key={item.name}>{item.name}</Badge>
         ))}

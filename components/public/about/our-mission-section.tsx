@@ -28,14 +28,18 @@ export default function OurMissionSection() {
         community. We are committed to:
       </div>
 
-      <ul className="grid grid-cols-4 gap-6">
+      <ul className="grid grid-cols-[repeat(auto-fill,minmax(18rem,1fr))] gap-4 md:gap-6">
         {missions.map((item) => (
           <li
             key={item.mission}
             className="flex-center flex-col gap-4 p-4 rounded-2xl border-2 border-muted hover:border-foreground duration-300"
           >
-            <header className="text-xl font-bold">{item.mission}</header>
-            <p className="text-muted-foreground">{item.desc}</p>
+            <header className="text-xl font-bold text-center md:text-start">
+              {item.mission}
+            </header>
+            <p className="text-muted-foreground text-center md:text-start">
+              {item.desc}
+            </p>
           </li>
         ))}
       </ul>

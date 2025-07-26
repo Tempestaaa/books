@@ -13,7 +13,7 @@ export default function ValuesSection() {
     <AboutWrapper header="Our Values">
       <p className="text-center">These values shape everything we do:</p>
 
-      <ul className="grid grid-flow-col-dense">
+      <ul className="grid grid-cols-[repeat(auto-fill,minmax(16rem,1fr))]">
         {values.map((item, id) => (
           <li
             key={id}

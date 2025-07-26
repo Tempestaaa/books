@@ -15,7 +15,7 @@ export default function CheckoutPage() {
       <DynamicBreadcrumb items={breadcrumbs} />
       <header className="text-3xl font-bold">Checkout</header>
 
-      <section className="mt-4 flex gap-16">
+      <section className="mt-4 flex flex-col-reverse lg:flex-row gap-16">
         <CheckoutForm />
         <ReviewCart />
       </section>

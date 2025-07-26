@@ -10,16 +10,17 @@ type Props = {
 
 export default function BookCard({ showSerial, serial }: Props) {
   return (
-    <article className="space-y-2 h-fit relative">
+    <article className="space-y-2 h-fit">
       <Link
         href={`/books/123`}
         tabIndex={-1}
-        className="h-96 block bg-muted rounded-2xl relative"
+        className="h-80 sm:h-92 md:h-96 block bg-muted rounded-2xl relative max-w-72 mx-auto"
       >
         <Badge variant="outline" className="absolute bottom-4 right-4">
           <StarIcon className="fill-star text-star" />
           <span>4.3</span>
         </Badge>
+        <Badge className="absolute top-4 right-4">New</Badge>
       </Link>
 
       <section className="flex gap-8 items-end-safe">
@@ -44,8 +45,6 @@ export default function BookCard({ showSerial, serial }: Props) {
           </div>
         </div>
       </section>
-
-      <Badge className="absolute top-4 right-4">New</Badge>
     </article>
   );
 }

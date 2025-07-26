@@ -22,7 +22,7 @@ export default async function SearchPage({ searchParams }: Props) {
     <div className="flex flex-col gap-4">
       <DynamicBreadcrumb items={breadcrumbs} />
 
-      <section className="flex-center gap-4 justify-between">
+      <section className="flex items-start md:items-center-safe flex-col md:flex-row gap-4 justify-between">
         <header className="text-3xl font-bold">
           {q ? unslugified(q) : "Search"}
         </header>
@@ -31,7 +31,7 @@ export default async function SearchPage({ searchParams }: Props) {
           <div className="flex-center flex-row-reverse gap-2 border-b-2 border-muted has-[:focus]:border-foreground duration-300">
             <Input
               placeholder="Search for book..."
-              className="no-border-input w-60 focus:w-xs transition-[width] duration-300"
+              className="no-border-input md:w-60 md:focus:w-xs transition-[width] duration-300"
             />
             <SearchIcon className="size-3.5" />
           </div>

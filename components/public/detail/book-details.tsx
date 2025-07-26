@@ -2,22 +2,15 @@ import DetailTabs from "@/components/public/detail/detail-tabs";
 import EvaluationParameters from "@/components/public/detail/evaluation-parameters";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import genres from "@/data/genres";
 import { slugified } from "@/lib/utils";
-import { Share2Icon } from "lucide-react";
 import Link from "next/link";
 
 export default function BookDetails() {
   return (
-    <section className="flex gap-8">
+    <section className="flex flex-col-reverse md:flex-row gap-4 md:gap-8">
       <section className="flex-1 flex flex-col gap-1">
-        <header className="text-3xl font-bold">Book title</header>
+        <header className="text-2xl md:text-3xl font-bold">Book title</header>
 
         <p>
           <span className="text-muted-foreground">by</span> Author name
@@ -42,9 +35,9 @@ export default function BookDetails() {
           <Button variant="ghost">Show more</Button>
         </div>
 
-        <div className="flex-center gap-4 my-2">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 my-2">
           <span className="font-bold">Genres: </span>
-          <ul className="flex-center gap-2">
+          <ul className="flex-center flex-wrap gap-2">
             {genres.slice(0, 6).map((item) => (
               <Badge
                 key={item.name}
@@ -66,19 +59,6 @@ export default function BookDetails() {
         </div>
 
         <DetailTabs />
-      </section>
-
-      <section>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Share2Icon />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Share</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
       </section>
     </section>
   );

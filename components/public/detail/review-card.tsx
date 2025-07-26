@@ -22,7 +22,7 @@ import {
 
 export default function ReviewCard() {
   return (
-    <div className="flex gap-4 group">
+    <div className="flex flex-col md:flex-row gap-2 md:gap-4 group">
       <HoverCard>
         <HoverCardTrigger className="h-fit">
           <Avatar className="size-12">
@@ -30,6 +30,7 @@ export default function ReviewCard() {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </HoverCardTrigger>
+
         <HoverCardContent className="w-xs flex flex-col gap-4">
           <section className="flex justify-between gap-4">
             <Avatar>

@@ -9,7 +9,7 @@ import Link from "next/link";
 export default function CartItem() {
   return (
     <li className="py-4 flex gap-4">
-      <section className="h-36 w-28 bg-muted rounded-md" />
+      <section className="hidden min-[425px]:block h-36 w-28 bg-muted rounded-md" />
 
       <section className="flex-1 flex flex-col">
         <div className="flex-center gap-4 justify-between">
@@ -24,7 +24,7 @@ export default function CartItem() {
         </div>
 
         <ul className="flex-center gap-2 mt-3">
-          {genres.slice(0, 3).map((item) => (
+          {genres.slice(0, 2).map((item) => (
             <Badge
               key={item.name}
               variant="outline"

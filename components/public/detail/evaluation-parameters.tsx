@@ -3,16 +3,19 @@ import { DotIcon } from "lucide-react";
 
 export default function EvaluationParameters() {
   return (
-    <div className="my-2 flex-center gap-2">
+    <div className="my-2 flex flex-col md:items-center-safe md:flex-row gap-2">
       <StarRating rating={4.2} showScore size="lg" />
-      <DotIcon />
-      <span>
-        86,257 <span className="text-muted-foreground">ratings</span>
-      </span>
-      <DotIcon />
-      <span>
-        40,777 <span className="text-muted-foreground">reviews</span>
-      </span>
+      <DotIcon className="hidden md:block" />
+
+      <div className="flex-center *:text-center">
+        <span>
+          86,257 <span className="text-muted-foreground">ratings</span>
+        </span>
+        <DotIcon />
+        <span>
+          40,777 <span className="text-muted-foreground">reviews</span>
+        </span>
+      </div>
     </div>
   );
 }

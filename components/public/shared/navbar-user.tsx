@@ -16,7 +16,7 @@ import Link from "next/link";
 export default function NavbarUser() {
   return (
     <section className="flex-center gap-4">
-      <section className="flex-center gap-2">
+      <section className="hidden md:flex items-center-safe gap-2">
         <TooltipProvider>
           {navbarUser.map((item) => {
             const Icon = item.icon;

@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col gap-12">
       <Hero />
-      <Separator className="!w-xl mx-auto" />
+      <Separator className="w-full md:!w-xl mx-auto" />
       <DisplayList header="Trending" showSerial />
       <DisplayGrid />
 

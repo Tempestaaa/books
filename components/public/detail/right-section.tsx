@@ -10,8 +10,10 @@ export default function RightSection() {
   ];
 
   return (
-    <section className="flex-1 min-h-[calc(100dvh-5rem)] p-4 space-y-4">
-      <DynamicBreadcrumb items={breadcrumbs} />
+    <section className="flex-1 min-h-[calc(100dvh-5rem)] md:p-4 space-y-4">
+      <div className="hidden md:block">
+        <DynamicBreadcrumb items={breadcrumbs} />
+      </div>
       <BookDetails />
     </section>
   );

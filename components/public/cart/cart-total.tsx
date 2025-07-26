@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function CartTotal() {
   return (
-    <aside className="w-xs rounded-2xl border-2 border-muted p-4 h-fit">
+    <aside className="md:w-xs rounded-2xl border-2 border-muted p-4 h-fit">
       <header className="text-xl font-bold">Order Summary</header>
       <section className="mt-4 flex flex-col gap-2">
         <TotalItem label="Subtotal" price={10} />

@@ -8,7 +8,7 @@ export default function CheckoutForm() {
     <form className="flex-1 flex flex-col gap-6">
       <header className="text-xl font-bold">Delivery information</header>
 
-      <div className="flex-center gap-8 *:flex-1">
+      <div className="flex-center flex-col md:flex-row gap-8 *:w-full">
         <Label className="flex flex-col items-start gap-1">
           <span>
             First name <span className="text-red-600">*</span>
@@ -18,6 +18,7 @@ export default function CheckoutForm() {
             className="no-border-input !border-b-2 border-muted"
           />
         </Label>
+
         <Label className="flex flex-col items-start gap-1">
           <span>
             Last name <span className="text-red-600">*</span>
@@ -59,7 +60,7 @@ export default function CheckoutForm() {
         />
       </Label>
 
-      <Label className="flex-center gap-4">
+      <Label className="flex items-center-safe gap-4">
         <Checkbox />
         <span className="text-xs text-muted-foreground">
           I have read and agree to the Terms and Conditions

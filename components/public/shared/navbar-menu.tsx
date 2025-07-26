@@ -9,7 +9,7 @@ export default function NavbarMenu() {
   const isActive = (href: string) => href === pathname;
 
   return (
-    <ul className="flex-center justify-center-safe h-full flex-1">
+    <ul className="hidden md:flex items-center-safe justify-center-safe h-full flex-1">
       {navbarMenu.map(({ href, label }) => (
         <li key={label} className="h-full">
           <Link

@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function ReviewCart() {
   return (
-    <aside className="w-xs flex flex-col gap-6">
+    <aside className="w-full lg:w-xs flex flex-col gap-6">
       <header className="text-xl font-bold">Review your cart</header>
       <ScrollArea className="h-56">
         <ul className="flex flex-col gap-4">

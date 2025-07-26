@@ -6,10 +6,10 @@ export default function Pagination() {
     <div className="border-t-2 border-muted py-8 flex-center gap-4 justify-between">
       <Button variant="outline" size="lg" className="rounded-full">
         <ArrowLeftIcon />
-        <span>Previous</span>
+        <span className="hidden md:block">Previous</span>
       </Button>
 
-      <ul className="flex-center gap-4">
+      <ul className="hidden md:flex items-center-safe gap-2">
         {[...Array(5)].map((_, id) => (
           <Button
             key={id}
@@ -26,7 +26,7 @@ export default function Pagination() {
       </ul>
 
       <Button variant="outline" size="lg" className="rounded-full">
-        <span>Next</span>
+        <span className="hidden md:block">Next</span>
         <ArrowRightIcon />
       </Button>
     </div>
