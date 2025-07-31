@@ -3,8 +3,6 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import Navbar from "@/components/public/shared/navbar";
-import Footer from "@/components/public/shared/footer";
 import { Suspense } from "react";
 import DefaultLoading from "@/components/loading/default-loading";
 
@@ -34,9 +32,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
             <div className="px-4">{children}</div>
-            <Footer />
 
             <Toaster richColors />
           </ThemeProvider>

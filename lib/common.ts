@@ -1,5 +1,14 @@
 import { iFooter, iNavbarMenu, iNavbarUser } from "@/types/common.type";
-import { HeartIcon, SearchIcon, ShoppingCartIcon } from "lucide-react";
+import {
+  BellIcon,
+  HeartIcon,
+  KeyRoundIcon,
+  ListOrderedIcon,
+  SearchIcon,
+  SettingsIcon,
+  ShoppingCartIcon,
+  User2Icon,
+} from "lucide-react";
 
 export const navbarMenu: iNavbarMenu[] = [
   {
@@ -25,12 +34,45 @@ export const navbarUser: iNavbarUser[] = [
   {
     icon: HeartIcon,
     label: "Wishlist",
-    href: "/user/wishlist",
+    href: "/account/wishlist",
   },
   {
     icon: ShoppingCartIcon,
     label: "Cart",
     href: "/cart",
+  },
+];
+
+export const userMenu: iNavbarUser[] = [
+  {
+    icon: User2Icon,
+    href: "/account/profile",
+    label: "My profile",
+  },
+  {
+    icon: ListOrderedIcon,
+    href: "/account/orders",
+    label: "Orders",
+  },
+  {
+    icon: BellIcon,
+    href: "/account/notifications",
+    label: "Notifications",
+  },
+  {
+    icon: HeartIcon,
+    href: "/account/wishlist",
+    label: "Wishlist",
+  },
+  {
+    icon: KeyRoundIcon,
+    href: "/account/change-password",
+    label: "Change password",
+  },
+  {
+    icon: SettingsIcon,
+    href: "/account/settings",
+    label: "Settings",
   },
 ];
 

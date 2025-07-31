@@ -15,7 +15,7 @@ export default function FilterSidebar() {
   return (
     <aside
       className={`min-h-[calc(100dvh-5rem)] transition-all duration-300 hidden md:block ${
-        isMinimize ? "w-12" : "w-xs "
+        isMinimize ? "w-12" : "w-xs"
       }`}
     >
       <FilterHeader isMinimize={isMinimize} setIsMinimize={setIsMinimize} />
